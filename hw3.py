@@ -14,7 +14,7 @@ T_env = 20
 k = 0.1
 
 # Set different time step sizes
-time_steps = [1, 5, 10]
+time_steps = [0.1, 0.5, 1, 5, 10]
 
 # Create a figure
 plt.figure()
@@ -41,10 +41,10 @@ for dt in time_steps:
         T[i + 1] = T[i] + dT_dt * dt
 
     # Plot temperatures for this time step
-    plt.plot(time, T, label=str(dt) + " minute steps")
+    plt.plot(time, T, label=str(dt))
 
 # Label the graph
-plt.xlabel("Time in minutes")
+plt.xlabel("Time")
 plt.ylabel("Temperature in Celsius")
 plt.title("Effect of time step size")
 
