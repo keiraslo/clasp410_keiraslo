@@ -21,11 +21,24 @@ This comparison depends on the chosen conditions: the competition example follow
 
 
 ### Task 2:
-For the competition models: How do the initial conditions and coefficient values affect the final result and general behavior of the two species? SHOW EXAMPLES
+For the competition models: How do the initial conditions and coefficient values affect the final result and general behavior of the two species? 
 
+Initial conditions and competition coefficients affect both the populations’ behavior over time and whether they coexist or one approaches extinction. Under strong competition, initial conditions
+can determine which species survives: in the figure’s left column, reversing the starting densities reverses which curve approaches 1 and which approaches zero. Under weaker competition, initial conditions affect the early behavior but not the final outcome. Both curves in the middle column approach approximately 0.67, demonstrating coexistence despite different starting populations.Differing competition strengths can also overpower an initial population advantage. In the right column, species 2 strongly suppresses species 1 but experiences weaker competition itself. Its dashed orange curve approaches 1 in both rows, even when it starts smaller, while the blue curve approaches zero. 
+
+Figure 2 also shows that initial conditions influence the populations’ behavior before equilibrium. In the middle subplots, the initiallylarger population briefly overshoots its final density before both species settle near 0.67. Increasing either growth coefficients strengthens that species’ growth relative to competition and can change the coexistence densities or survival
+outcome. 
+
+### Figure 2: Initial Population and Competition Stregth
 ![alt text](comp&starting.png)
+
+Figure 3 shows that variance in growth coefficients affects the final population densities. With both constants equal to 1, both species approach 0.67 as we discovered previously. If we increase species 1's growth coefficient by doubling it (middle Figure 3 subplot) we get a density of about .86, and species 2 which maintains the same growth constant's density decreases to about 0.57. If we instead increase species 2's coefficient (c=2), then the associated densties switch populations. Therefore, a higher growth constant which represents quicker reproduction whem viewed in isolation indicates that the species with faster reproduction affects the one without by supressing the other's growth. 
+### Figure 3: Growth Coefficient Impacts
+![alt text](.png)
+
 ### Task 3: 
 **For the Predator-Prey models: How do the initial conditions and coefficient values affect the final result and general behavior of the two species? What new information can we get from the phase diagrams?**
+
 
 
 ![alt text](axesmoved.png)
