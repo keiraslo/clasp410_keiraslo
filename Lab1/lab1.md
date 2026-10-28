@@ -16,6 +16,20 @@ I decided to approach creating this model by creating a function full of if stat
 
 To validate this model, I first established the expected results to be printed for each iteration given our test conditions (100% spread, 3x3 grid, start in center). Then, I can print the initial, uncopied grid, run the function and print the result, and then repeat to get as many results as I want to test. 
 
+Here is an example of an output:
+Iteration 0
+[[2. 2. 2.]
+ [2. 3. 2.]
+ [2. 2. 2.]]
+Iteration 1
+[[2. 3. 2.]
+ [3. 1. 3.]
+ [2. 3. 2.]]
+Iteration 2
+[[3. 1. 3.]
+ [1. 1. 1.]
+ [3. 1. 3.]]
+
 ### Task 2🌲📊
 
 #### Implementation
@@ -28,14 +42,89 @@ For tasks 2a and 2b, I decided to create new functions to produce plots which vi
 
 We need to investigate the following variables: the percentage of cells bare, percent burning, and percent healthy. We should also examine the number of iterations the model takes for the fire to burn out. To quantify the results, for each simulation we can calculate the percentage of each state as a fraction over the total number of grid cells (15). Then, we can create figures to visually represent the change in each.
 
+Output example:
+Wider Grid: Iteration 0
+[[2. 2. 2. 2. 2.]
+ [2. 2. 3. 2. 2.]
+ [2. 2. 2. 2. 2.]]
+Wider Grid: Iteration 1
+[[2. 2. 3. 2. 2.]
+ [2. 3. 1. 3. 2.]
+ [2. 2. 3. 2. 2.]]
+Wider Grid: Iteration 2
+[[2. 3. 1. 3. 2.]
+ [3. 1. 1. 1. 3.]
+ [2. 3. 1. 3. 2.]]
+Randomized P_spread:  0.7160801348091962
+Randomized Forest After One Iteration:
+[[2. 2. 3. 2. 2.]
+ [2. 3. 1. 2. 2.]
+ [2. 2. 2. 2. 2.]]
+Randomized P_bare:  0.6339474588691092
+Randomized P_spread:  0.08802643720187531
+[[1. 1. 2. 2. 1.]
+ [2. 1. 1. 1. 1.]
+ [1. 1. 1. 1. 1.]]
+Randomized P_ignite:  0.26259041870548416
+Randomized P_bare:  0.6339474588691092
+Randomized P_spread:  0.08802643720187531
+[[1. 1. 3. 2. 1.]
+ [1. 1. 1. 1. 1.]
+ [1. 1. 1. 1. 1.]]
+
 **How does the spread of wildfire depend on the probability of spread of fire and initial forest density?**
 In the second figure our code produces titled: "Effects of P_spread and P_bare", we can see the relationship between the increase in the percentage of the forest burned dependent on the probability of spread and the probability of a cell to be bare. Cells being bare is significant as the fewer forested cells the model has, the less dense it is initially. In the figure, we see that P_spread, represented as a blue line, is dominant when it comes to determining the amount of forest burned with a steep increase starting at about 0.5 capping off at 100% burned once reaching approximately 0.75. The initial forest density appears to have a similar relationship but to a lesser extent. P_bare, a value inversley proportional to the forest density, appears to dominate the percent burned prior to the Probability = 0.4 threshold. This orange line peaks at a probability of 0.2 with 40 percent of the forest burned. This leads me to believe that while wildfire spread is lightly mitigated by a lower forest density, the probability of spread is much more significant to the total amount of forest burned.
+
+![alt text](effectsofspreadandbare.png) 
 
 #### Task 2b
 
 **Explain how controlled burns could be used to control the spread of wildfires. Would controlled burns reduce the likelihood of fires, severity of fires or both? Explain using figures and words.**
 
 In our simulated model, fires cannot spread to already barren ground. If a controlled burn is planned, cells can be selected in a manner which limits the number of cells that can burn. Seeing as in our model, fire can only spread to neighboring cells, a controlled burn and its area can act as a buffer between forested zones and limit the total damage. In the "Controlled Burn Forest After One Iteration" and "Controlled Burn Forest After Two Iterations" printed returns, we can see that the artifically set buffer line of burnt cells prevent the ignited spots from spreading fire across this barrier. 
+
+Output example:
+Controlled Burn Forest Before Spread:
+[[2. 3. 3. 3. 2. 3. 2. 3. 2. 2.]
+ [2. 3. 3. 3. 2. 2. 3. 2. 2. 2.]
+ [1. 1. 1. 1. 1. 1. 1. 1. 1. 1.]
+ [2. 2. 2. 3. 2. 2. 2. 2. 3. 3.]
+ [2. 2. 2. 2. 2. 3. 2. 2. 3. 3.]
+ [3. 2. 2. 2. 3. 2. 3. 2. 3. 2.]
+ [3. 2. 2. 3. 3. 2. 2. 2. 3. 3.]
+ [3. 3. 2. 2. 2. 2. 3. 2. 3. 3.]
+ [3. 3. 3. 3. 2. 3. 2. 3. 3. 3.]
+ [2. 3. 3. 3. 2. 2. 2. 3. 2. 2.]]
+Controlled Burn Forest After One Iteration:
+P_ignite: 0.4685208882774019
+P_spread: 0.667069427920431
+[[3. 1. 1. 1. 3. 1. 3. 1. 3. 2.]
+ [3. 1. 1. 1. 2. 3. 1. 3. 2. 2.]
+ [1. 1. 1. 1. 1. 1. 1. 1. 1. 1.]
+ [2. 2. 3. 1. 2. 2. 2. 3. 1. 1.]
+ [2. 2. 2. 2. 3. 1. 3. 3. 1. 1.]
+ [1. 3. 2. 3. 1. 3. 1. 3. 1. 3.]
+ [1. 3. 2. 1. 1. 3. 3. 3. 1. 1.]
+ [1. 1. 3. 3. 3. 3. 1. 3. 1. 1.]
+ [1. 1. 1. 1. 3. 1. 3. 1. 1. 1.]
+ [3. 1. 1. 1. 3. 2. 3. 1. 3. 3.]]
+Controlled Burn Forest After Two Iterations:
+[[1. 1. 1. 1. 1. 1. 1. 1. 1. 3.]
+ [1. 1. 1. 1. 3. 1. 1. 1. 3. 2.]
+ [1. 1. 1. 1. 1. 1. 1. 1. 1. 1.]
+ [2. 3. 1. 1. 3. 2. 3. 1. 1. 1.]
+ [2. 2. 2. 3. 1. 1. 1. 1. 1. 1.]
+ [1. 1. 3. 1. 1. 1. 1. 1. 1. 1.]
+ [1. 1. 3. 1. 1. 1. 1. 1. 1. 1.]
+ [1. 1. 1. 1. 1. 1. 1. 1. 1. 1.]
+ [1. 1. 1. 1. 1. 1. 1. 1. 1. 1.]
+ [1. 1. 1. 1. 1. 3. 1. 1. 1. 1.]]
+Number of iterations: 29
+Healthy: 1638
+Immune: 697
+Infected: 0
+Deceased: 165
+
 
 ### Task 3 🧟🤮
 
@@ -46,3 +135,5 @@ Since this model is supposed to demonstrate spread similar to the forest fire mo
 **How does disease mortality rate P_survive and early vaccine rates affectdisease spread? What does our simple model tell us about the roles of vaccines in presenting large-scale spread of disease?**
 
 As P_survive increases, fewer people die from the infection and instead develop immunity. This behaves similarly to the effects of a controlled burn. However, in the case of a controlled burn, we can strategically place burnt areas to prevent spread to certain regions. In this model, it is unrealistic to be able to control which cells are set to an immune state. Therefore, P_survive's increase results in fewer cells/people available for infection to spread to and then to their surroundings. While we can't directly control survival like we can a controlled burn, by strategically using vaccines (if quantities are limited) and making sure vaccines are distributed to as many regions of the grid as possible, we can limit the total spread. When looking at the last figure our code produces with the two axes, when P_survive is higher, the aqua immune line rises high above the pink and black infected and dead populations.
+
+![alt text](zombieapocolypse.png) 

@@ -68,18 +68,21 @@ def spread_fire(forest, prob_spread):
 
 forest = np.zeros([ny, nx]) + 2  # Creates a 3x3 grid of healthy forest.
 forest[1, 1] = 3  # Sets the center cell on fire.
+forest_3x3_iterations = [forest.copy()]
 
 #Printing the initial grid
 print("Iteration 0")
 print(forest)
 
 forest = spread_fire(forest, prob_spread)  # Runs the model one time step.
+forest_3x3_iterations.append(forest.copy())
 
 #Printing grid after 1 step
 print("Iteration 1") 
 print(forest)  
 
 forest = spread_fire(forest, prob_spread)  # Runs the model a second time step.
+forest_3x3_iterations.append(forest.copy())
 
 #Printing grid after 2 steps
 print("Iteration 2")  
@@ -483,6 +486,17 @@ axes[1].set_ylabel("Number of People")
 axes[1].set_title("Disease Progression")
 axes[1].legend()
 
+plt.tight_layout()
+plt.show()
+
+# Task 1: Display every iteration of the original 3x3 forest
+fig, axes = plt.subplots(1, len(forest_3x3_iterations), figsize=(9, 3))
+for iteration, (ax, iteration_forest) in enumerate(zip(axes, forest_3x3_iterations)):
+    ax.pcolor(iteration_forest, cmap=forest_cmap, vmin=1, vmax=3)
+    ax.set_title(f"Iteration {iteration}")
+    ax.set_aspect("equal")
+
+fig.suptitle("3x3 Forest: All Iterations")
 plt.tight_layout()
 plt.show()
 
