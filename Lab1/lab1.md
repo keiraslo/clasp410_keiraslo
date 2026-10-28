@@ -80,7 +80,7 @@ In the second figure our code produces titled: "Effects of P_spread and P_bare",
 #### Task 2b
 
 **Explain how controlled burns could be used to control the spread of wildfires. Would controlled burns reduce the likelihood of fires, severity of fires or both? Explain using figures and words.**
-
+\
 In our simulated model, fires cannot spread to already barren ground. If a controlled burn is planned, cells can be selected in a manner which limits the number of cells that can burn. Seeing as in our model, fire can only spread to neighboring cells, a controlled burn and its area can act as a buffer between forested zones and limit the total damage. In the "Controlled Burn Forest After One Iteration" and "Controlled Burn Forest After Two Iterations" printed returns, we can see that the artifically set buffer line of burnt cells prevent the ignited spots from spreading fire across this barrier. 
 
 Output example:
