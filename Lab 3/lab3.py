@@ -63,6 +63,8 @@ fluxes = np.linalg.solve(A, b)
 print("Fluxes, W/m^2:")
 print(fluxes)
 
+# source: https://numpy.org/doc/stable/reference/generated/numpy.testing.assert_allclose.html
+# google search AI overview thing led me to this source ^
 # Validation: the solution must satisfy every boundary equation.
 np.testing.assert_allclose(A @ fluxes, b, rtol=1e-10, atol=1e-10)
 
@@ -98,14 +100,10 @@ print("All validation checks passed.")
 # Define a function so we can run the model with different inputs
 def atmosphere_model(nlayers, S0, emissivity, albedo):
 
-    # Check emissivity because we divide by it when finding temperatures
-    if emissivity <= 0 or emissivity > 1:
-        raise ValueError("Emissivity must be greater than 0 and at most 1.")
-
-    # Store the Stefan-Boltzmann constant in W/m^2/K^4
+    # Stefan-Boltzmann constant
     sigma = 5.6703e-8
 
-    # Fraction of infrared radiation transmitted through one layer
+    # Fraction of infrared radiation transmitted through one layer (again in case)
     t = 1 - emissivity
 
     # Average absorbed sunlight
@@ -244,7 +242,7 @@ plt.show()
 emissivity = 0.255
 
 # Test models with zero through four atmospheric layers
-layer_numbers = np.arange(5)
+layer_numbers = np.arange(6)
 
 # Create an array to store the surface temperature for each model
 layer_surface_temperatures = np.zeros(len(layer_numbers))
@@ -279,7 +277,7 @@ plt.show()
 # Plot temperature profiles for the one through four layer models
 plt.figure()
 
-for n in range(1, 5):
+for n in range(1, 6):
 
     # Calculate the surface and atmospheric temperatures
     temperatures = atmosphere_model(n, S0, emissivity, albedo)
@@ -293,7 +291,7 @@ for n in range(1, 5):
 
 plt.xlabel("Temperature (K)")
 plt.ylabel("Model layer above surface")
-plt.yticks(np.arange(5))
+plt.yticks(np.arange(6))
 plt.title("Temperature profiles with emissivity = 0.255")
 plt.legend()
 plt.grid(True)
